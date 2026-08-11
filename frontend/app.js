@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = "const API_BASE = "https://codelint-awmb.onrender.com/api";
 
 // ---------------- tabs ----------------
 document.querySelectorAll(".tab").forEach((tab) => {
