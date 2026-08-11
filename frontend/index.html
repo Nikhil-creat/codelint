@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Codelint — AI Code Review Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="titlebar">
+  <div class="titlebar-dots"><span></span><span></span><span></span></div>
+  <div class="titlebar-path">~/codelint <span class="titlebar-sep">/</span> <span id="active-path">analyze</span></div>
+  <div class="titlebar-status" id="conn-status">● checking backend…</div>
+</div>
+
+<div class="shell">
+  <nav class="tabs">
+    <button class="tab active" data-tab="analyze"><span class="tab-dot dot-analyze"></span>analyze.py</button>
+    <button class="tab" data-tab="history"><span class="tab-dot dot-history"></span>history.log</button>
+    <button class="tab" data-tab="dashboard"><span class="tab-dot dot-dashboard"></span>dashboard.view</button>
+  </nav>
+
+  <main>
+    <!-- ANALYZE -->
+    <section class="panel active" id="panel-analyze">
+      <div class="panel-head">
+        <h1>Paste code, get a real static analysis</h1>
+        <p>Runs an AST-based engine locally — checks bugs, security risks, complexity and style. No code leaves your machine.</p>
+      </div>
+
+      <div class="analyze-grid">
+        <div class="editor-card">
+          <div class="editor-card-head">
+            <input type="text" id="filename" value="untitled.py" spellcheck="false" />
+            <span class="lang-badge">python</span>
+          </div>
+          <textarea id="code-input" spellcheck="false" placeholder="# paste your Python code here...&#10;def example(items=[]):&#10;    for i in items:&#10;        print(i)"></textarea>
+          <div class="editor-card-foot">
+            <button id="analyze-btn" class="btn-primary">Run analysis →</button>
+            <span id="analyze-error" class="error-text"></span>
+          </div>
+        </div>
+
+        <div class="result-card" id="result-card">
+          <div class="result-empty" id="result-empty">
+            <div class="result-empty-glyph">&gt;_</div>
+            <p>Results will appear here after you run an analysis.</p>
+          </div>
+          <div id="result-content" class="result-content" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="panel" id="panel-history">
+      <div class="panel-head">
+        <h1>Analysis history</h1>
+        <p>Every run is saved to a local SQLite database.</p>
+      </div>
+      <div class="table-card">
+        <table id="history-table">
+          <thead>
+            <tr><th>score</th><th>file</th><th>lines</th><th>functions</th><th>timestamp</th><th></th></tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+        <div id="history-empty" class="table-empty" style="display:none;">No analyses yet — run one from the analyze tab.</div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="panel" id="panel-dashboard">
+      <div class="panel-head">
+        <h1>Code health dashboard</h1>
+        <p>Aggregate trends across every analysis you've run.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <span class="stat-label">total analyses</span>
+          <span class="stat-value" id="stat-total">—</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">avg score</span>
+          <span class="stat-value" id="stat-avg">—</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">most common issue</span>
+          <span class="stat-value" id="stat-common">—</span>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Score trend</h3>
+          <canvas id="trend-chart" height="220"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Issues by category</h3>
+          <canvas id="category-chart" height="220"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
