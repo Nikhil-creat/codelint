@@ -87,3 +87,10 @@ Ideas if you want to keep building on this:
 - Add user accounts so history is per-user instead of global
 - Deploy the backend (Render/Fly.io) and frontend (Vercel/Netlify) so it's a
   live link for your resume, not just a local demo
+
+## 👤 Author
+
+**NIKHIL CHARY SRIRAMOJU**
+- GitHub: [@Nikhil-creat](https://github.com/Nikhil-creat)
+- LinkedIn: [nikhil-chary-sriramoju](https://in.linkedin.com/in/nikhil-chary-sriramoju-95041b38a)
+- Instagram: [@nikhil__sriramoju](https://www.instagram.com/nikhil__sriramoju?stkn=MTFxdDZobmJtb2RoaA==)
